@@ -84,9 +84,26 @@
 | **欧洲（爱尔兰）** | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/create/review?stackName=clawdbot-bedrock&templateURL=https://sharefile-jiade.s3.cn-northwest-1.amazonaws.com.cn/clawdbot-bedrock.yaml) |
 | **亚太（东京）** | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/create/review?stackName=clawdbot-bedrock&templateURL=https://sharefile-jiade.s3.cn-northwest-1.amazonaws.com.cn/clawdbot-bedrock.yaml) |
 
+**macOS (EC2 Mac) - 适合 Apple 开发**
+
+| 区域 | 部署 | 月度成本 |
+|------|------|----------|
+| **美国西部（俄勒冈）** | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/review?stackName=moltbot-mac&templateURL=https://sharefile-jiade.s3.cn-northwest-1.amazonaws.com.cn/clawdbot-bedrock-mac.yaml) | $468-792 |
+| **美国东部（弗吉尼亚）** | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?stackName=moltbot-mac&templateURL=https://sharefile-jiade.s3.cn-northwest-1.amazonaws.com.cn/clawdbot-bedrock-mac.yaml) | $468-792 |
+
+> **Mac 实例**：24 小时最低分配期，适合 iOS/macOS 开发团队。[了解更多 →](#macos-deployment)
+
 > **说明**：使用 Global CRIS 配置文件 - 在全球 30+ 区域可用。可在任意区域部署，请求会自动路由到最优位置。
 
-> **💡 想要更有趣的方式？** 和 Kiro AI 聊天部署！Kiro 会引导你完成部署和手机配置。[试试 Kiro 部署 →](QUICK_START_KIRO.md)
+---
+
+### 🎯 想要更有趣的部署方式？
+
+**和 Kiro AI 聊天部署！** Kiro 会引导你完成部署和手机配置——无需记命令。
+
+### 👉 **[试试 Kiro 部署 →](QUICK_START_KIRO.md)** 👈
+
+---
 
 > **注意**：在目标区域创建 EC2 密钥对
 
@@ -536,6 +553,33 @@ aws bedrock-runtime invoke-model \
 # 查看 Clawdbot 日志
 journalctl --user -u clawdbot-gateway -n 100
 ```
+
+## macOS 部署
+
+**仅适合 iOS/macOS 开发团队。** Mac 实例成本 $468-792/月，24 小时最低分配期。
+
+### 何时使用
+
+- ✅ iOS/macOS 应用开发和 CI/CD
+- ✅ Xcode 构建自动化
+- ✅ Apple 生态集成（iCloud、APNs）
+- ❌ 一般 Moltbot 使用（Linux 便宜 12 倍）
+
+### Mac 实例选项
+
+| 类型 | 芯片 | 内存 | 月度成本 | 适用场景 |
+|------|------|------|----------|----------|
+| mac2.metal | M1 | 16GB | $468 | 标准构建 |
+| mac2-m2.metal | M2 | 24GB | $632 | 最新芯片 |
+| mac2-m2pro.metal | M2 Pro | 32GB | $792 | 高性能 |
+
+### 部署 Mac 版本
+
+点击上方 macOS 部分的"部署"按钮。**重要**：必须指定支持 Mac 实例的可用区（先在 AWS 控制台检查）。
+
+**访问方式**：与 Linux 相同（SSM Session Manager + 端口转发）
+
+---
 
 ## 与原版对比
 
