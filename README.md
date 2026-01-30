@@ -91,6 +91,8 @@ Click to deploy:
 
 **After deployment (~8 minutes), check CloudFormation Outputs tab**:
 
+> **💡 Want a more fun way?** Chat with Kiro AI to deploy! Kiro will guide you through deployment and help configure your phone. [Try Kiro deployment →](QUICK_START_KIRO.md)
+
 1. **Install SSM Plugin**: Click link in `Step1InstallSSMPlugin` (one-time setup)
 2. **Port Forwarding**: Copy command from `Step2PortForwarding`, run on your computer (keep terminal open)
 3. **Open URL**: Copy URL from `Step3AccessURL`, open in browser (token included!)
@@ -609,6 +611,26 @@ aws bedrock-runtime invoke-model \
 journalctl --user -u clawdbot-gateway -n 100
 ```
 
+## Project Structure
+
+```
+clawdbot-aws-bedrock/
+├── README.md                          # This file
+├── cloudformation/
+│   └── clawdbot-bedrock.yaml         # Main CloudFormation template
+├── scripts/
+│   ├── bedrock-precheck.sh           # Pre-deployment check script
+│   └── deploy.sh                     # Deployment helper script
+├── lambda/
+│   └── precheck/
+│       ├── index.py                  # Lambda pre-check function
+│       └── requirements.txt          # Python dependencies
+└── docs/
+    ├── DEPLOYMENT.md                 # Detailed deployment guide
+    ├── SECURITY.md                   # Security best practices
+    └── TROUBLESHOOTING.md            # Common issues and solutions
+```
+
 ## Comparison with Original Moltbot
 
 ### Local Deployment (Original)
@@ -658,6 +680,8 @@ This deployment template is provided as-is. Clawdbot itself is licensed under it
 
 ---
 
-**Built by builder + Kiro**
+**Built by builder + Kiro for AWS customers and partners** 🦞
+
+*90% of this project's code was generated through conversations with Kiro AI.*
 
 Deploy your personal AI assistant on AWS infrastructure you control.

@@ -86,6 +86,8 @@
 
 > **说明**：使用 Global CRIS 配置文件 - 在全球 30+ 区域可用。可在任意区域部署，请求会自动路由到最优位置。
 
+> **💡 想要更有趣的方式？** 和 Kiro AI 聊天部署！Kiro 会引导你完成部署和手机配置。[试试 Kiro 部署 →](QUICK_START_KIRO.md)
+
 > **注意**：在目标区域创建 EC2 密钥对
 
 ### 手动部署
@@ -406,14 +408,14 @@ CreateVPCEndpoints: false  # 成本优化
   # 缺点：流量经过公网
 ```
 
-## 文档
+## 资源
 
-- [部署指南](DEPLOYMENT.md) - 详细安装说明
-- [安全最佳实践](SECURITY.md) - 安全配置
-- [故障排查](TROUBLESHOOTING.md) - 常见问题解决
+- [Moltbot 文档](https://docs.molt.bot/)
+- [Moltbot GitHub](https://github.com/moltbot/moltbot)
+- [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+- [SSM Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)
 
-
-## 安全特性
+## 支持
 
 ### 1. IAM Role 认证
 
@@ -594,4 +596,8 @@ Clawdbot 本身有独立的许可证。参见 [Clawdbot License](https://github.
 
 ---
 
-**Built by builder + Kiro**
+**Built by builder + Kiro for AWS customers and partners** 🦞
+
+*本项目 90% 的代码由 Kiro AI 通过对话生成。*
+
+在你控制的 AWS 基础设施上部署个人 AI 助手 🦞
