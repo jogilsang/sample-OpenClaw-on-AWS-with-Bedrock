@@ -65,7 +65,12 @@ Reply with number (1-4), region code, or 'default' for us-west-2."
    • 73% cheaper than Claude
    • Balanced performance, supports text+image+video
 
-Reply with number (1-3) or 'default' for Nova 2 Lite."
+4. Kimi K2.5 🌙
+   • $0.60/$3.00 per 1M tokens
+   • Multimodal agentic model (text + vision)
+   • 262K context window, agent swarm support
+
+Reply with number (1-4) or 'default' for Nova 2 Lite."
 ```
 
 **Question 3 - Instance Size**:

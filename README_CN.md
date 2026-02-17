@@ -397,12 +397,14 @@ ClawdbotModel:
   - anthropic.claude-3-5-sonnet-20241022-v2:0  # 稳定备选
   - anthropic.claude-3-5-haiku-20241022-v1:0   # 更快，更便宜
   - anthropic.claude-3-haiku-20240307-v1:0     # 最快/最便宜
+  - moonshotai.kimi-k2.5                       # 多模态智能体，262K 上下文
 ```
 
 **模型选择指南**：
 - **Claude Sonnet 4.5**（默认）：最佳性能、编码和复杂推理能力。在全球 30+ 个区域可用。
 - **Nova v2**：性能和可用性的最佳平衡。
 - **Claude 3.5 Haiku**：快速且经济，适合简单任务。
+- **Kimi K2.5**：多模态智能体模型（文本 + 视觉），262K 上下文窗口，$0.60/$3.00 每百万 tokens。
 
 ### 实例类型
 

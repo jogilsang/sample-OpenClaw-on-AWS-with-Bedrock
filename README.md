@@ -433,6 +433,7 @@ Cost: ~$0.01/request | Time: 2-5s | Security: Private network
 | Claude Haiku 4.5 | $1/1M tokens | $5/1M tokens |
 | Nova Pro | $0.80/1M tokens | $3.20/1M tokens |
 | DeepSeek R1 | $0.55/1M tokens | $2.19/1M tokens |
+| Kimi K2.5 | $0.60/1M tokens | $3.00/1M tokens |
 
 **Example**: 100 conversations/day with Nova 2 Lite ≈ $5-8/month
 
@@ -459,6 +460,7 @@ ClawdbotModel:
   - global.anthropic.claude-haiku-4-5-20251001-v1:0   # Fast and efficient
   - us.deepseek.r1-v1:0                         # Open-source reasoning
   - us.meta.llama3-3-70b-instruct-v1:0          # Open-source alternative
+  - moonshotai.kimi-k2.5                        # Multimodal agentic, 262K context
 ```
 
 **Model Selection Guide**:
@@ -466,6 +468,7 @@ ClawdbotModel:
 - **Claude Sonnet 4.5**: Most capable for complex reasoning and coding
 - **Nova Pro**: Best balance of performance and cost, supports multimodal
 - **DeepSeek R1**: Cost-effective open-source reasoning model
+- **Kimi K2.5**: Multimodal agentic model (text + vision), 262K context window, $0.60/$3.00 per 1M tokens
 
 ### Instance Types
 
