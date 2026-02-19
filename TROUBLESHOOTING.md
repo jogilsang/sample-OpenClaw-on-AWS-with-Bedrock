@@ -338,7 +338,45 @@ XDG_RUNTIME_DIR=/run/user/1000 journalctl --user -u clawdbot-gateway -f
 # Check ~/.clawdbot/clawdbot.json for "dmPolicy": "pairing"
 ```
 
-### 10. CloudFormation Stack Fails
+### 10. AWS CLI "text contents could not be decoded" Error
+
+**Symptom**: When running `aws cloudformation create-stack --template-body file://clawdbot-bedrock.yaml`, you get:
+```
+An error occurred (ValidationError) when calling the CreateStack operation: 
+Template format error: YAML not well-formed. text contents could not be decoded
+```
+
+**Cause**: The YAML file is not encoded in UTF-8, or contains a BOM (Byte Order Mark) that AWS CLI cannot decode.
+
+**Solutions**:
+
+```bash
+# Option 1: Convert file to UTF-8 (Linux/Mac)
+iconv -f UTF-16 -t UTF-8 clawdbot-bedrock.yaml > clawdbot-bedrock-utf8.yaml
+aws cloudformation create-stack --template-body file://clawdbot-bedrock-utf8.yaml ...
+
+# Option 2: Remove BOM if present
+sed '1s/^\xEF\xBB\xBF//' clawdbot-bedrock.yaml > clawdbot-bedrock-clean.yaml
+
+# Option 3: Re-download from GitHub (ensures UTF-8)
+curl -O https://raw.githubusercontent.com/aws-samples/sample-Moltbot-on-AWS-with-Bedrock/main/clawdbot-bedrock.yaml
+
+# Option 4: Use text editor to save as UTF-8
+# - VS Code: Click encoding in status bar → "Save with Encoding" → UTF-8
+# - Notepad++: Encoding → Convert to UTF-8 (without BOM)
+# - Sublime: File → Save with Encoding → UTF-8
+
+# Verify encoding
+file -I clawdbot-bedrock.yaml
+# Should show: text/plain; charset=utf-8
+```
+
+**Prevention**: Always clone the repository using Git, which preserves file encoding:
+```bash
+git clone https://github.com/aws-samples/sample-Moltbot-on-AWS-with-Bedrock.git
+```
+
+### 11. CloudFormation Stack Fails
 
 **Symptom**: Stack creation fails or rolls back
 

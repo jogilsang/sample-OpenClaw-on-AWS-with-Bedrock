@@ -42,10 +42,12 @@ cd sample-OpenClaw-on-AWS-with-Bedrock
 
 ```bash
 cd sample-OpenClaw-on-AWS-with-Bedrock
-kiro chat
+kiro-cli chat
 ```
 
 Kiro CLI will load the workspace context and steering files.
+
+**Note**: If you're using Kiro IDE extension, you can skip the CLI and just open the project in your IDE - the steering files will load automatically.
 
 **Verify it's loaded**:
 - You should see `.kiro/steering/` folder in the file tree
@@ -209,7 +211,8 @@ But honestly, **Kiro makes it way more fun**. It's like having a DevOps expert g
    - "Can you guide me through OpenClaw deployment?"
 
 4. **Manual activation**: If automatic detection doesn't work, you can manually reference the steering file:
-   - In Kiro chat, type: `#deploy-OpenClaw-conversationally`
+   - In Kiro IDE: Type `#deploy-OpenClaw-conversationally` in the chat
+   - In Kiro CLI: Run `/context add .kiro/steering/deploy-OpenClaw-conversationally.md`
    - Then say: "Help me deploy"
 
 ### "I don't have AWS credentials configured"
