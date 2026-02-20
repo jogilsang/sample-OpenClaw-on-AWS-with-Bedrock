@@ -42,18 +42,14 @@ Parameters:
       - "t4g.medium"
       - "t4g.large"
       - "t4g.xlarge"
+      - "c6g.large"
+      - "c6g.xlarge"
       - "c7g.large"
       - "c7g.xlarge"
       - "t3.small"
       - "t3.medium"
       - "t3.large"
       - "c5.xlarge"
-      - "t4g.small"
-      - "t4g.medium"
-      - "t4g.large"
-      - "t4g.xlarge"
-      - "c6g.large"
-      - "c6g.xlarge"
 
 
   KeyPairName:
@@ -107,6 +103,7 @@ Mappings:
     c6g.large: { Arch: "arm64" }
     c6g.xlarge: { Arch: "arm64" }
     c7g.large: { Arch: "arm64" }
+    c7g.xlarge: { Arch: "arm64" }
 
 
 Resources:
@@ -449,30 +446,18 @@ Resources:
           sudo -u ubuntu mkdir -p /home/ubuntu/.aws
           
           # Get region using IMDSv2 (already fetched at top, reuse $AWS_REGION)
-          sudo -u ubuntu cat > /home/ubuntu/.aws/config << EOF
-[default]
-region = $AWS_REGION
-output = json
-EOF
+          CF_REGION="${AWS::Region}"
+          sudo -u ubuntu bash -c "printf '[default]\nregion = %s\noutput = json\n' \"${!AWS_REGION:-$CF_REGION}\" > /home/ubuntu/.aws/config"
           chown -R ubuntu:ubuntu /home/ubuntu/.aws
           chmod 600 /home/ubuntu/.aws/config
           
           # Configure environment variables
           echo "[7/9] Configuring environment variables..."
-          cat >> /home/ubuntu/.bashrc << EOF
-export AWS_REGION=$AWS_REGION
-export AWS_DEFAULT_REGION=$AWS_REGION
-export AWS_PROFILE=default
-export OPENCLAW_MODEL=${OpenClawModel}
-export OPENCLAW_USE_BEDROCK=true
-EOF
+          printf 'export AWS_REGION=%s\nexport AWS_DEFAULT_REGION=%s\nexport AWS_PROFILE=default\nexport OPENCLAW_MODEL=%s\nexport OPENCLAW_USE_BEDROCK=true\n' "$AWS_REGION" "$AWS_REGION" "${OpenClawModel}" >> /home/ubuntu/.bashrc
           
           # Create systemd environment file for services
           sudo -u ubuntu mkdir -p /home/ubuntu/.config/environment.d
-          sudo -u ubuntu cat > /home/ubuntu/.config/environment.d/aws.conf << EOF
-AWS_REGION=$AWS_REGION
-AWS_DEFAULT_REGION=$AWS_REGION
-EOF
+          sudo -u ubuntu bash -c "printf 'AWS_REGION=%s\nAWS_DEFAULT_REGION=%s\n' \"$AWS_REGION\" \"$AWS_REGION\" > /home/ubuntu/.config/environment.d/aws.conf"
           
           # 启用 systemd linger
           loginctl enable-linger ubuntu

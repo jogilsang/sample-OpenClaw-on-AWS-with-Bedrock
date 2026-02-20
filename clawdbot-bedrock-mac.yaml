@@ -500,24 +500,14 @@ Resources:
           echo "[5/9] Configuring AWS..."
           sudo -u $CURRENT_USER mkdir -p $USER_HOME/.aws
           
-          # Create AWS config file directly
-          sudo -u $CURRENT_USER cat > $USER_HOME/.aws/config << EOF
-[default]
-region = $AWS_REGION
-output = json
-EOF
+          CF_REGION="${AWS::Region}"
+          sudo -u $CURRENT_USER bash -c "printf '[default]\nregion = %s\noutput = json\n' \"${!AWS_REGION:-$CF_REGION}\" > $USER_HOME/.aws/config"
           chown -R $CURRENT_USER:staff $USER_HOME/.aws
           chmod 600 $USER_HOME/.aws/config
           
           # Configure environment variables
           echo "[6/9] Configuring environment variables..."
-          cat >> $USER_HOME/.zshrc << EOF
-export AWS_REGION=$AWS_REGION
-export AWS_DEFAULT_REGION=$AWS_REGION
-export AWS_PROFILE=default
-export OPENCLAW_MODEL=${OpenClawModel}
-export OPENCLAW_USE_BEDROCK=true
-EOF
+          printf 'export AWS_REGION=%s\nexport AWS_DEFAULT_REGION=%s\nexport AWS_PROFILE=default\nexport OPENCLAW_MODEL=%s\nexport OPENCLAW_USE_BEDROCK=true\n' "$AWS_REGION" "$AWS_REGION" "${OpenClawModel}" >> $USER_HOME/.zshrc
           
           # Configure OpenClaw
           echo "[7/9] Configuring OpenClaw..."
